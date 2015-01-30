@@ -1,0 +1,19 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:rakuten_linkshare_settings) %>
+<% end %>
+
+<%= form_tag admin_rakuten_linkshare_settings_path, :method => :put do %>
+  <div id="preferences" data-hook>
+    <fieldset class="general no-border-top">
+      <div class="field">
+        <%= label_tag(:merchant_id, Spree.t(:rakuten_linkshare_merchant_id)) + tag(:br) %>
+        <%= preference_field_tag(:merchant_id, SpreeRakutenLinkshare::Config.merchant_id, :type => :string) %>
+      </div>
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= button Spree.t('actions.update'), 'icon-refresh' %>
+      </div>
+    </fieldset>
+  </div>
+<% end %>
