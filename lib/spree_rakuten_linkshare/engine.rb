@@ -3,10 +3,15 @@ module SpreeRakutenLinkshare
     require 'spree/core'
     isolate_namespace Spree
     engine_name 'spree_rakuten_linkshare'
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # use rspec for tests
     config.generators do |g|
       g.test_framework :rspec
+    end
+
+    initializer "spree_rakuten_linkshare.environment", :before => :load_config_initializers do |app|
+      SpreeRakutenLinkshare::Config = SpreeRakutenLinkshare::Configuration.new
     end
 
     def self.activate
