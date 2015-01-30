@@ -14,7 +14,7 @@ module Spree
     end
 
     def rakuten_name_list
-      line_items.map { |li| li.variant.name.gsub('|', '') }.join('|')
+      line_items.map { |li| URI::escape(li.variant.name.gsub('|', '')) }.join('|')
     end
   end
 end
