@@ -1,0 +1,4 @@
+<!-- insert_bottom '#order' -->
+<% if params.has_key? :checkout_complete %>
+  <%= render partial: 'spree/orders/rakuten_linkshare_pixel_tracking', locals: { order: @order } %>
+<% end %>
