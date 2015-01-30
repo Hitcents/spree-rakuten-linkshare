@@ -4,5 +4,5 @@
 en:
   spree:
     rakuten_linkshare_settings: "Rakuten Linkshare Settings"
-    rakuten_merchant_id: "Rakuten Merchant ID"
+    rakuten_linkshare_merchant_id: "Merchant ID"
 
