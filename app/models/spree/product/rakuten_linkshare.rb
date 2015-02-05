@@ -169,7 +169,7 @@ module Spree
     end
 
     def rakuten_linkshare_product_feed_primary_file_record_is_product_link_flag
-      'N'
+      'Y'
     end
 
     def rakuten_linkshare_product_feed_primary_file_record_is_storefront_flag
