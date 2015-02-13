@@ -5,4 +5,7 @@ en:
   spree:
     rakuten_linkshare_settings: "Rakuten Linkshare Settings"
     rakuten_linkshare_merchant_id: "Merchant ID"
+    rakuten_linkshare_ftp_host: "Hostname"
+    rakuten_linkshare_ftp_username: "Username"
+    rakuten_linkshare_ftp_password: "Password"
 

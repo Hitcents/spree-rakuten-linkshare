@@ -11,9 +11,24 @@
         <%= label_tag(:merchant_id, Spree.t(:rakuten_linkshare_merchant_id)) + tag(:br) %>
         <%= preference_field_tag(:merchant_id, SpreeRakutenLinkshare::Config.merchant_id, :type => :string) %>
       </div>
-      <div class="form-buttons filter-actions actions" data-hook="buttons">
-        <%= button Spree.t('actions.update'), 'icon-refresh' %>
+    </fieldset>
+    <fieldset class="general no-border-top">
+      <legend>FTP Configuration</legend>
+      <div class="field">
+        <%= label_tag(:ftp_host, Spree.t(:rakuten_linkshare_ftp_host)) + tag(:br) %>
+        <%= preference_field_tag(:ftp_host, SpreeRakutenLinkshare::Config.ftp_host, :type => :string) %>
+      </div>
+      <div class="field">
+        <%= label_tag(:ftp_username, Spree.t(:rakuten_linkshare_ftp_username)) + tag(:br) %>
+        <%= preference_field_tag(:ftp_username, SpreeRakutenLinkshare::Config.ftp_username, :type => :string) %>
+      </div>
+      <div class="field">
+        <%= label_tag(:ftp_password, Spree.t(:rakuten_linkshare_ftp_password)) + tag(:br) %>
+        <%= preference_field_tag(:ftp_password, SpreeRakutenLinkshare::Config.ftp_password, :type => :string) %>
       </div>
     </fieldset>
+    <div class="form-buttons filter-actions actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'icon-refresh' %>
+    </div>
   </div>
 <% end %>
