@@ -1,4 +1,4 @@
-require 'tempfile'
+require 'net/ftp'
 
 module Spree
   module Product::RakutenLinkshare
@@ -8,16 +8,40 @@ module Spree
     end
 
     module ClassMethods
-      def create_rakuten_linkshare_product_feed_primary_file
-        record_count = 0
-        Tempfile.open('rakuten-linkshare-product-feed', Rails.root.join('tmp')) do |f|
-          f.print rakuten_linkshare_product_feed_primary_header + "\n"
-          products_for_rakuten_linkshare_product_feed.find_each do |p|
-            f.print p.rakuten_linkshare_product_feed_primary_file_record + "\n"
-            record_count += 1
-          end
-          f.print ['TRL', record_count].join('|') + "\n"
+
+      def upload_rakuten_linkshare_product_feed
+        raise 'Rakuten FTP Host not defined' unless SpreeRakutenLinkshare::Config.ftp_host.present?
+        raise 'Rakuten FTP Username not defined' unless SpreeRakutenLinkshare::Config.ftp_username.present?
+        raise 'Rakuten FTP Password not defined' unless SpreeRakutenLinkshare::Config.ftp_password.present?
+
+        primary_file = create_rakuten_linkshare_product_feed_primary_file
+
+        Net::FTP.open(SpreeRakutenLinkshare::Config.ftp_host) do |ftp|
+          ftp.login SpreeRakutenLinkshare::Config.ftp_username, SpreeRakutenLinkshare::Config.ftp_password
+          ftp.puttextfile primary_file
         end
+      end
+
+      def create_rakuten_linkshare_product_feed_primary_file
+        filename = Rails.root.join('tmp', rakuten_linkshare_product_feed_primary_file_filename)
+
+        f = File.new(filename, 'w')
+        f.print rakuten_linkshare_product_feed_primary_header + "\n"
+
+        record_count = 0
+        products_for_rakuten_linkshare_product_feed.find_each do |p|
+          f.print p.rakuten_linkshare_product_feed_primary_file_record + "\n"
+          record_count += 1
+        end
+
+        f.print ['TRL', record_count].join('|') + "\n"
+        f.close
+
+        filename
+      end
+
+      def rakuten_linkshare_product_feed_primary_file_filename
+        "#{SpreeRakutenLinkshare::Config.merchant_id}_nmerchandis#{DateTime.now.strftime("%Y%m%d")}.txt"
       end
 
       def rakuten_linkshare_product_feed_primary_header
