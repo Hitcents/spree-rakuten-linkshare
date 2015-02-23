@@ -22,6 +22,7 @@ module Spree
         return unless file
 
         Net::FTP.open(SpreeRakutenLinkshare::Config.ftp_host) do |ftp|
+          ftp.passive = true
           ftp.login SpreeRakutenLinkshare::Config.ftp_username, SpreeRakutenLinkshare::Config.ftp_password
           ftp.puttextfile file
         end

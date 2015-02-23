@@ -17,6 +17,7 @@ module Spree
         primary_file = create_rakuten_linkshare_product_feed_primary_file
 
         Net::FTP.open(SpreeRakutenLinkshare::Config.ftp_host) do |ftp|
+          ftp.passive = true
           ftp.login SpreeRakutenLinkshare::Config.ftp_username, SpreeRakutenLinkshare::Config.ftp_password
           ftp.puttextfile primary_file
         end
