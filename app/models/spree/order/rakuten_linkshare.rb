@@ -1,3 +1,5 @@
+require 'net/ftp'
+
 module Spree
   module Order::RakutenLinkshare
 
