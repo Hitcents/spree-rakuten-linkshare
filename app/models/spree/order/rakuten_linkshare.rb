@@ -85,7 +85,7 @@ module Spree
       end
 
       def rakuten_linkshare_cancel_file_filename
-        "MID_trans#{DateTime.now.strftime("%Y%m%d")}.txt"
+        "#{SpreeRakutenLinkshare::Config.merchant_id}_trans#{DateTime.now.strftime("%Y%m%d")}.txt"
       end
     end
 
