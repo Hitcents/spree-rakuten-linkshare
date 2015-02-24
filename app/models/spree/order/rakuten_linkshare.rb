@@ -47,19 +47,18 @@ module Spree
           o.line_items.each do |li|
             f.puts [
               o.number,
-              "\t",
+              "",
               o.created_at.strftime("%Y-%m-%d"),
               o.completed_at.strftime("%Y-%m-%d"),
               li.variant.sku,
               li.quantity,
               li.rakuten_linkshare_amount * -1,
-              ((li.price.to_f + li.promo_total.to_f) * li.quantity * -100).to_i,
               li.currency,
-              "\t",
-              "\t",
-              "\t",
+              "",
+              "",
+              "",
               li.name,
-            ].map { |x| x.to_s.gsub('|', ' ') }.join('|')
+            ].map { |x| x.to_s.gsub("\t", ' ') }.join("\t")
           end
         end
 
@@ -67,18 +66,18 @@ module Spree
           r.line_items.each do |sku, data|
             f.puts [
               r.order.number,
-              "\t",
+              "",
               r.order.created_at.strftime("%Y-%m-%d"),
               r.order.completed_at.strftime("%Y-%m-%d"),
               sku,
               data[:qty],
               data[:line_item].rakuten_linkshare_amount * -1,
               data[:line_item].currency,
-              "\t",
-              "\t",
-              "\t",
+              "",
+              "",
+              "",
               data[:line_item].name,
-            ].map { |x| x.to_s.gsub('|', ' ') }.join('|')
+            ].map { |x| x.to_s.gsub("\t", ' ') }.join("\t")
           end
         end
 
